@@ -2,14 +2,19 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"os"
 )
 
 func main() {
 	unzipOptions, err := parseCommandArgs()
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
+		os.Exit(1)
 	}
 
-	fmt.Printf("UnzipOptions: %+v\n", unzipOptions)
+	err = unzip(*unzipOptions)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }
